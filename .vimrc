@@ -1,6 +1,6 @@
 " Settings enabled by default in Neovim
 set autoindent autoread background=dark backspace=indent,eol,start
-"set backupdir
+"set backupdir=~/.local/state/vim/backup/
 set laststatus=2
 set list listchars=tab:>\ ,trail:-,nbsp:+
 
@@ -48,6 +48,7 @@ Plug 'tpope/vim-commentary'
 
 " Fuzzy Finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 " Settings for plugins
@@ -78,6 +79,10 @@ set clipboard=unnamedplus
 set breakindent
 
 " Save undo history
+" This is disabled by default
+" If you wish to enable persistent undo,
+" uncomment the next two lines and create undo directory
+"set undodir=$HOME/.local/state/vim/undo//
 "set undofile
 
 " Case-insensitive searching UNLESS \C or capital in search
@@ -110,7 +115,24 @@ xmap <silent> <Space> <Nop>
 nmap <expr> <silent> k v:count == 0 ? 'gk' : 'k'
 nmap <expr> <silent> j v:count == 0 ? 'gj' : 'j'
 
-" ...
+" [[ Configure fzf.vim ]]
+" See `:help fzf-vim`
+
+" [?] Find recently opened files
+nmap <leader>? :History<CR>
+" [ ] Find existing buffers
+nmap <leader><space> :Buffers<CR>
+" [/] Fuzzily search in current buffer
+nmap <leader>/ :BLines<CR>
+" Search [G]it [F]iles
+nmap <leader>gf :GFiles<CR>
+" [S]earch [F]iles
+nmap <leader>sf :Files<CR>
+" [S]earch [H]elp
+nmap <leader>sh :Helptags<CR>
+
+" [[ Configure built-in completion ]]
+" TODO Make tab bring up the completion menu
 
 " The line beneath this is called `modeline`. See `:help modeline`
 " vim: ts=2 sts=2 sw=2 et
