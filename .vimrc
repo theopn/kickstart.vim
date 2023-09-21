@@ -1,8 +1,54 @@
-" Settings enabled by default in Neovim
-set autoindent autoread background=dark backspace=indent,eol,start
-"set backupdir=~/.local/state/vim/backup/
-set laststatus=2
-set list listchars=tab:>\ ,trail:-,nbsp:+
+"
+" =====================================================================
+" =========================== KICKSTART.VIM ===========================
+" =====================================================================
+"
+" Kickstart.vim is a template for **your** Vim configuration.
+" You should read every line of the code and understand what it is doing.
+" Afterwards, you can configure and tinker 
+"
+" Kickstart.vim is heavily inspired by Kickstart.nvim.
+" If you are using Neovim, consider using Kickstart.nvim instead:
+" https://github.com/nvim-lua/kickstart.nvim
+"
+" Feel free to delete this comment once you feel that this config is "yours."
+" I hope you enjoy your Vim journey!
+" - Theo
+"
+
+" [[ Setting Neovim Default Options ]]
+" Many of these are settings enabled by default in Neovim
+" Find the list of the options here:
+" https://neovim.io/doc/user/vim_diff.html
+
+" Automatically indent : Detect when file is changed externally
+set autoindent autoread
+" Dark mode for colorschemes : Change backspace behavior
+set background=dark backspace=indent,eol,start
+" Turn off vi compatibility : Display @@@ in the last column of last line
+set nocompatible display=lastline
+" Set encoding : Allow opening other file w/o saving current (becomes hidden)
+set encoding=utf-8 hidden
+" Highlight search result as you type : Always show statusline
+set incsearch laststatus=2
+" Characters to display for tab, trail spaces, etc., used when `:set list`
+set listchars=tab:>\ ,trail:-,nbsp:+
+" Show line and column number in the statusline (overriden by airline)
+set ruler
+" Show stuff like number of lines selected in the bottom right
+set showcmd
+" TODO
+"  NOTE: See `:help tabstop` to learn how tabs in Vim work
+set smarttab
+" Completion menu for command (:)
+set wildmenu
+
+" 
+"set backupdir=~/.local/state/vim/backup//
+"set directory=~/.local/state/vim/swap//
+
+" TODO
+set list
 
 " Set <space> as the leader key
 " See `:help mapleader`
@@ -56,13 +102,14 @@ call plug#end()
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 " OneDark
 colorscheme onedark
+" indentLine
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 " [[ Settings options ]]
 " NOTE: You can change these options as you wish!
 
 " Set highlight on search
-set hlsearch
+set nohlsearch
 
 " Make line numbers default
 set number
