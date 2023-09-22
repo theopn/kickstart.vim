@@ -3,9 +3,12 @@
 " =========================== KICKSTART.VIM ===========================
 " =====================================================================
 "
-" Kickstart.vim is a template for **your** Vim configuration.
+" Kickstart.vim is a template for *your* Vim configuration.
 " You should read every line of the code and understand what it is doing.
-" Afterwards, you can configure and tinker 
+" Afterwards, you can configure and tinker with vimrc.
+"
+" Vim's built-in help, triggered by `:help X` is a very helpful guide for any
+" of the Vim's built-in features as well as plug-ins.
 "
 " Kickstart.vim is heavily inspired by Kickstart.nvim.
 " If you are using Neovim, consider using Kickstart.nvim instead:
@@ -16,12 +19,17 @@
 " - Theo
 "
 
-" [[ Setting Neovim Default Options ]]
-" Many of these are settings enabled by default in Neovim
+" [[ Setting Default Options ]]
+" These are some of the settings enabled by default in Neovim.
+" These are options believed by many Vim users to be essential.
 " Find the list of the options here:
-" https://neovim.io/doc/user/vim_diff.html
+" https://neovim.io/doc/user/vim_diff.html#nvim-defaults
 
-" Automatically indent : Detect when file is changed externally
+" Automatically detect filetype 
+filetype on
+" Turn on syntax highlighting
+syntax on
+" Automatically indent : Detect when the file is changed externally
 set autoindent autoread
 " Dark mode for colorschemes : Change backspace behavior
 set background=dark backspace=indent,eol,start
@@ -37,14 +45,23 @@ set listchars=tab:>\ ,trail:-,nbsp:+
 set ruler
 " Show stuff like number of lines selected in the bottom right
 set showcmd
-" TODO
+" Use shiftwidth for the line indent and (soft)tabstop for others
 "  NOTE: See `:help tabstop` to learn how tabs in Vim work
 set smarttab
 " Completion menu for command (:)
 set wildmenu
 
-" 
-"set backupdir=~/.local/state/vim/backup//
+" NOTE: See `:help swap-file` and `:help 'directory'`
+" Swap files is a recovery file for the current Vim buffer.
+" If Vim closes unexpectedly, swap file can recover the unsaved progress.
+" By default, swap files are saved in the current directory (.).
+" Some people like having all swap files in one directory, like Neovim does.
+" To achieve this:
+" 1. Create swap directory: `:! mkdir -p ~/.local/state/vim/swap`
+" 2. Uncomment the following line starting with "set directory" and save the file
+" 3. Source the .vimrc: `:source ~/.vimrc`
+" 4. Now all swap files will be saved in one directory
+" - You may change the swap directory to another directory you prefer
 "set directory=~/.local/state/vim/swap//
 
 " TODO
@@ -120,17 +137,23 @@ set mouse=a
 " Sync clipboard between OS and Neovim.
 "  Remove this option if you want your OS clipboard to remain independent.
 "  See `:help 'clipboard'`
-set clipboard=unnamedplus
+"set clipboard=unnamedplus
 
 " Enable break indent
 set breakindent
 
 " Save undo history
-" This is disabled by default
-" If you wish to enable persistent undo,
-" uncomment the next two lines and create undo directory
-"set undodir=$HOME/.local/state/vim/undo//
-"set undofile
+"  By default, undo files (.file.txt.un~) are saved in the current directory.
+"  This makes the file system very messy, so undofile is disabled by default.
+"  If would like to enable undofile I recommend you to change undodir:
+"  1. Create undo directory: `:! mkdir -p ~/.local/state/vim/undo`
+"  2. Uncomment the following line starting with "set undodir" and save the file
+"  3. Source the .vimrc: `:source ~/.vimrc`
+"  4. Now undo history will persist between Vim sessions
+"
+"  NOTE: See `:help undofile` and `:help undodir` for more information
+"    You may change the undodir to another directory you prefer
+"set undodir=~/.local/state/vim/undo// undofile
 
 " Case-insensitive searching UNLESS \C or capital in search
 set ignorecase
