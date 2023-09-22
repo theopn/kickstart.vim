@@ -8,7 +8,7 @@
 " Afterwards, you can configure and tinker with vimrc.
 "
 " Vim's built-in help, triggered by `:help X` is a very helpful guide for any
-" of the Vim's built-in features as well as plug-ins.
+" of the Vim's built-in features as well as plugins.
 "
 " Kickstart.vim is heavily inspired by Kickstart.nvim.
 " If you are using Neovim, consider using Kickstart.nvim instead:
@@ -19,7 +19,7 @@
 " - Theo
 "
 
-" [[ Setting Default Options ]]
+" [[ Setting default options ]]
 " These are some of the settings enabled by default in Neovim.
 " These are options believed by many Vim users to be essential.
 " Find the list of the options here:
@@ -35,7 +35,7 @@ set autoindent autoread
 set background=dark backspace=indent,eol,start
 " Turn off vi compatibility : Display @@@ in the last column of last line
 set nocompatible display=lastline
-" Set encoding : Allow opening other file w/o saving current (becomes hidden)
+" Set encoding : Allow opening other files w/o saving current (make it hidden)
 set encoding=utf-8 hidden
 " Highlight search result as you type : Always show statusline
 set incsearch laststatus=2
@@ -52,20 +52,17 @@ set smarttab
 set wildmenu
 
 " NOTE: See `:help swap-file` and `:help 'directory'`
-" Swap files is a recovery file for the current Vim buffer.
-" If Vim closes unexpectedly, swap file can recover the unsaved progress.
-" By default, swap files are saved in the current directory (.).
-" Some people like having all swap files in one directory, like Neovim does.
-" To achieve this:
-" 1. Create swap directory: `:! mkdir -p ~/.local/state/vim/swap`
-" 2. Uncomment the following line starting with "set directory" and save the file
-" 3. Source the .vimrc: `:source ~/.vimrc`
-" 4. Now all swap files will be saved in one directory
-" - You may change the swap directory to another directory you prefer
+"  Swap files are recovery mechanism for the open Vim buffers.
+"  If Vim closes unexpectedly, a swap file can recover the unsaved progress.
+"  By default, swap files are saved in the current directory (.).
+"  Some people like having all swap files in one directory like Neovim does.
+"  To achieve this:
+"  1. Create the swap directory: `:! mkdir -p ~/.local/state/vim/swap`
+"  2. Uncomment the following line starting with "set directory" and save the file
+"  3. Source the .vimrc: `:source ~/.vimrc`
+"  4. Now all swap files will be saved in ~/.local/state/vim/swap
+"  - You may change the swap directory to another directory you prefer
 "set directory=~/.local/state/vim/swap//
-
-" TODO
-set list
 
 " Set <space> as the leader key
 " See `:help mapleader`
@@ -112,15 +109,8 @@ Plug 'tpope/vim-commentary'
 " Fuzzy Finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-call plug#end()
 
-" Settings for plugins
-" vim-which-key
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
-" OneDark
-colorscheme onedark
-" indentLine
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+call plug#end()
 
 " [[ Settings options ]]
 " NOTE: You can change these options as you wish!
@@ -146,7 +136,7 @@ set breakindent
 "  By default, undo files (.file.txt.un~) are saved in the current directory.
 "  This makes the file system very messy, so undofile is disabled by default.
 "  If would like to enable undofile I recommend you to change undodir:
-"  1. Create undo directory: `:! mkdir -p ~/.local/state/vim/undo`
+"  1. Create the undo directory: `:! mkdir -p ~/.local/state/vim/undo`
 "  2. Uncomment the following line starting with "set undodir" and save the file
 "  3. Source the .vimrc: `:source ~/.vimrc`
 "  4. Now undo history will persist between Vim sessions
@@ -174,9 +164,6 @@ set termguicolors
 
 " [[ Basic Keymaps ]]
 
-" TODO Remove this later
-inoremap jk <ESC>
-
 " Keymaps for better default experience
 nmap <silent> <Space> <Nop>
 xmap <silent> <Space> <Nop>
@@ -184,6 +171,14 @@ xmap <silent> <Space> <Nop>
 " Remap for dealing with word wrap
 nmap <expr> <silent> k v:count == 0 ? 'gk' : 'k'
 nmap <expr> <silent> j v:count == 0 ? 'gj' : 'j'
+
+" [[ Configure plugins ]]
+" vim-which-key
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+" OneDark
+colorscheme onedark
+" indentLine
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 " [[ Configure fzf.vim ]]
 " See `:help fzf-vim`
@@ -201,8 +196,32 @@ nmap <leader>sf :Files<CR>
 " [S]earch [H]elp
 nmap <leader>sh :Helptags<CR>
 
-" [[ Configure built-in completion ]]
-" TODO Make tab bring up the completion menu
+" [[ Configure built-in keyword completion ]]
+" See `:help compl-omni` and `:help omnifunc`
+set omnifunc=syntaxcomplete#Complete
+
+" If current line is contains non-whitespace, <tab> starts keyword completion
+" `:help ins-completion`
+function! CleverTab()
+  if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+    return "\<Tab>"
+  else
+    return "\<C-N>"
+  endif
+endfunction
+" Inserts the result (<C-r>=) of CleverTab()
+inoremap <Tab> <C-r>=CleverTab()<CR>
+
+" Use S-Tab to scroll completion menu when completion menu is open
+inoremap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'
+
+" Enter key confirms the current selection when completion is open
+inoremap <expr> <CR> pumvisible() ? '<C-y>' : '<CR>'
+
+" [[ Personal settings for development ]]
+" TODO Remove this in the release
+set list
+inoremap jk <ESC>
 
 " The line beneath this is called `modeline`. See `:help modeline`
 " vim: ts=2 sts=2 sw=2 et
