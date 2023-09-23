@@ -19,56 +19,13 @@
 " - Theo
 "
 
-" [[ Setting default options ]]
-" These are some of the settings enabled by default in Neovim.
-" These are options believed by many Vim users to be essential.
-" Find the list of the options here:
-" https://neovim.io/doc/user/vim_diff.html#nvim-defaults
-
-" Automatically detect filetype 
-filetype on
-" Turn on syntax highlighting
-syntax on
-" Automatically indent : Detect when the file is changed externally
-set autoindent autoread
-" Dark mode for colorschemes : Change backspace behavior
-set background=dark backspace=indent,eol,start
-" Turn off vi compatibility : Display @@@ in the last column of last line
-set nocompatible display=lastline
-" Set encoding : Allow opening other files w/o saving current (make it hidden)
-set encoding=utf-8 hidden
-" Highlight search result as you type : Always show statusline
-set incsearch laststatus=2
-" Characters to display for tab, trail spaces, etc., used when `:set list`
-set listchars=tab:>\ ,trail:-,nbsp:+
-" Show line and column number in the statusline (overriden by airline)
-set ruler
-" Show stuff like number of lines selected in the bottom right
-set showcmd
-" Use shiftwidth for the line indent and (soft)tabstop for others
-"  NOTE: See `:help tabstop` to learn how tabs in Vim work
-set smarttab
-" Completion menu for command (:)
-set wildmenu
-
-" NOTE: See `:help swap-file` and `:help 'directory'`
-"  Swap files are recovery mechanism for the open Vim buffers.
-"  If Vim closes unexpectedly, a swap file can recover the unsaved progress.
-"  By default, swap files are saved in the current directory (.).
-"  Some people like having all swap files in one directory like Neovim does.
-"  To achieve this:
-"  1. Create the swap directory: `:! mkdir -p ~/.local/state/vim/swap`
-"  2. Uncomment the following line starting with "set directory" and save the file
-"  3. Source the .vimrc: `:source ~/.vimrc`
-"  4. Now all swap files will be saved in ~/.local/state/vim/swap
-"  - You may change the swap directory to another directory you prefer
-"set directory=~/.local/state/vim/swap//
 
 " Set <space> as the leader key
 " See `:help mapleader`
 "  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 let mapleader=' '
 let maplocalleader = ' '
+
 
 " Install package manager
 " https://github.com/junegunn/vim-plug/
@@ -87,6 +44,9 @@ Plug 'tpope/vim-rhubarb'
 
 " Detect tabstop and shiftwidth automatically
 Plug 'tpope/vim-sleuth'
+
+" Use <Tab> to auto complete
+Plug 'ervandew/supertab'
 
 " Useful plugin to show you pending keybinds.
 Plug 'liuchengxu/vim-which-key'
@@ -112,6 +72,52 @@ Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
+
+" [[ Setting default options ]]
+" These are some of the settings enabled by default in Neovim.
+" These are options believed by many Vim users to be essential.
+" Find the list of the options here:
+" https://neovim.io/doc/user/vim_diff.html#nvim-defaults
+
+" Automatically detect filetype 
+filetype on
+
+" Turn on syntax highlighting
+syntax on
+
+" Automatically indent : Detect when the file is changed externally
+set autoindent autoread
+
+" Dark mode for colorschemes : Change backspace behavior
+set background=dark backspace=indent,eol,start
+
+" Turn off vi compatibility : Display @@@ in the last column of last line
+set nocompatible display=lastline
+
+" Set encoding : Allow opening other files w/o saving current (make it hidden)
+set encoding=utf-8 hidden
+
+" Highlight search result as you type : Always show statusline
+set incsearch laststatus=2
+
+" Characters to display for tab, trail spaces, etc., used if `:set list` is on
+set listchars=tab:>\ ,trail:-,nbsp:+
+"set list
+
+" Show line and column number in the statusline (overriden by airline)
+set ruler
+
+" Show stuff like number of lines selected in the bottom right
+set showcmd
+
+" Use shiftwidth for the line indent and (soft)tabstop for others
+"  NOTE: See `:help tabstop` to learn how tabs in Vim work
+set smarttab
+
+" Completion menu for command (:)
+set wildmenu
+
+
 " [[ Settings options ]]
 " NOTE: You can change these options as you wish!
 
@@ -127,7 +133,7 @@ set mouse=a
 " Sync clipboard between OS and Neovim.
 "  Remove this option if you want your OS clipboard to remain independent.
 "  See `:help 'clipboard'`
-"set clipboard=unnamedplus
+set clipboard=unnamedplus
 
 " Enable break indent
 set breakindent
@@ -135,7 +141,7 @@ set breakindent
 " Save undo history
 "  By default, undo files (.file.txt.un~) are saved in the current directory.
 "  This makes the file system very messy, so undofile is disabled by default.
-"  If would like to enable undofile I recommend you to change undodir:
+"  If would like to enable undofile, I recommend you to change undodir:
 "  1. Create the undo directory: `:! mkdir -p ~/.local/state/vim/undo`
 "  2. Uncomment the following line starting with "set undodir" and save the file
 "  3. Source the .vimrc: `:source ~/.vimrc`
@@ -162,23 +168,26 @@ set completeopt=menuone,noselect
 " NOTE: You should make sure your terminal supports this
 set termguicolors
 
+
 " [[ Basic Keymaps ]]
 
 " Keymaps for better default experience
-nmap <silent> <Space> <Nop>
-xmap <silent> <Space> <Nop>
+nnoremap <silent> <Space> <Nop>
+xnoremap <silent> <Space> <Nop>
 
 " Remap for dealing with word wrap
 nmap <expr> <silent> k v:count == 0 ? 'gk' : 'k'
 nmap <expr> <silent> j v:count == 0 ? 'gj' : 'j'
 
+
 " [[ Configure plugins ]]
-" vim-which-key
+" Make <Space> trigger key map guide
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
-" OneDark
+" Set color scheme
 colorscheme onedark
-" indentLine
+" Characters to render for indentation guide
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
 
 " [[ Configure fzf.vim ]]
 " See `:help fzf-vim`
@@ -197,23 +206,9 @@ nmap <leader>sf :Files<CR>
 nmap <leader>sh :Helptags<CR>
 
 " [[ Configure built-in keyword completion ]]
-" See `:help compl-omni` and `:help omnifunc`
+" Set Omni Completion
+"  See `:help compl-omni` and `:help omnifunc`
 set omnifunc=syntaxcomplete#Complete
-
-" If current line is contains non-whitespace, <tab> starts keyword completion
-" `:help ins-completion`
-function! CleverTab()
-  if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
-    return "\<Tab>"
-  else
-    return "\<C-N>"
-  endif
-endfunction
-" Inserts the result (<C-r>=) of CleverTab()
-inoremap <Tab> <C-r>=CleverTab()<CR>
-
-" Use S-Tab to scroll completion menu when completion menu is open
-inoremap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'
 
 " Enter key confirms the current selection when completion is open
 inoremap <expr> <CR> pumvisible() ? '<C-y>' : '<CR>'
