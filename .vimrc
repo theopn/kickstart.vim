@@ -120,7 +120,7 @@ set wildmenu
 " NOTE: You can change these options as you wish!
 
 " Set highlight on search
-set nohlsearch
+set hlsearch
 
 " Make line numbers default
 set number
