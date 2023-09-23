@@ -19,7 +19,6 @@
 " - Theo
 "
 
-
 " Set <space> as the leader key
 " See `:help mapleader`
 "  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
@@ -102,7 +101,6 @@ set incsearch laststatus=2
 
 " Characters to display for tab, trail spaces, etc., used if `:set list` is on
 set listchars=tab:>\ ,trail:-,nbsp:+
-"set list
 
 " Show line and column number in the statusline (overriden by airline)
 set ruler
@@ -212,11 +210,6 @@ set omnifunc=syntaxcomplete#Complete
 
 " Enter key confirms the current selection when completion is open
 inoremap <expr> <CR> pumvisible() ? '<C-y>' : '<CR>'
-
-" [[ Personal settings for development ]]
-" TODO Remove this in the release
-set list
-inoremap jk <ESC>
 
 " The line beneath this is called `modeline`. See `:help modeline`
 " vim: ts=2 sts=2 sw=2 et
