@@ -42,7 +42,7 @@ This is an easy way to manage your Vimrc with Git as well as other configuration
 
 ### Post Installation
 
-Run the following command and then you are ready to go!
+Run the following command and launch Vim again, and you are ready to go!
 
 ```bash
 vim +PlugInstall +qa
@@ -53,9 +53,10 @@ vim +PlugInstall +qa
 kickstart.vim:
 
 - is written in Vimscript (:surprised Pikachu face:) and designed for Vim >= 0.8
-- **enables some settings enabled by default in Neovim (e.g., autoindent, syntax)** on the top of kickstart.nvim settings
+- **enables some settings enabled by default in Neovim (e.g., filetype, syntax, autoindent, etc.)** on the top of kickstart.nvim settings
 - uses Vim alternative for the following plugins
     - lazy.nvim -> vim-plug
+    - nvim-cmp -> supertab
     - which-key.nvim -> vim-which-key
     - gitsigns.nvim -> vim-gitgutter
     - onedark.nvim -> onedark.vim
@@ -63,13 +64,12 @@ kickstart.vim:
     - indent-blankline -> indentLine
     - Comment.nvim -> vim-commentary
     - telescope.nvim -> fzf & fzf.vim
-- uses **SuperTab** in lieu of nvim-cmp
 - disables `undofile` by default, but the instructions for changing `undodir` and enabling `undofile` are included
+- enables `hlsearch`
 - does not provide an alternative for:
     - highlight on yank
     - **nvim-treesitter**
     - **Neovim diagnostics and LSP**
     - I considered using coc.nvim, but it requires external dependencies and user configuration not suitable for the goal of kickstart.vim.
         I am open to creating a branch/separate version of kickstart.vim with coc.nvim support
-- omits keybindings for some Telescope features with no FZF alternatives (`grep_string`, `live_grep`, `diagnostics`, and `resume`)
 
