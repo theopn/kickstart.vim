@@ -72,7 +72,7 @@ Plug 'junegunn/fzf.vim'
 call plug#end()
 
 
-" [[ Setting default options ]]
+" [[ Setting sensible default options ]]
 " These are some of the settings enabled by default in Neovim.
 " These are options believed by many Vim users to be essential.
 " Find the list of the options here:

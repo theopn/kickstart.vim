@@ -19,7 +19,7 @@ Like Kickstart.nvim, Kickstart.vim strives to be:
 > [!NOTE]
 > I highly recommend you to [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo so that you can manage your own configuration
 
-Option #1: Copying the contents of the `.vimrc`
+Option #1: Manually copying and pasting the contents of the `.vimrc`
 
 **Option #2: Creating a symbolic link**
 
