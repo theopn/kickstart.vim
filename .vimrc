@@ -98,11 +98,11 @@ set autoindent autoread
 " Dark mode for colorschemes : Change backspace behavior
 set background=dark backspace=indent,eol,start
 
-" Turn off vi compatibility : Display @@@ in the last column of last line
-set nocompatible display=lastline
+" Display @@@ in the last column of last line : set default encoding
+set display=lastline encoding=utf-8
 
-" Set encoding : Allow opening other files w/o saving current (make it hidden)
-set encoding=utf-8 hidden
+" Allow opening other files w/o saving current buffer (make the current hidden)
+set hidden
 
 " Highlight search result as you type : Always show statusline
 set incsearch laststatus=2
@@ -182,8 +182,8 @@ nnoremap <silent> <Space> <Nop>
 xnoremap <silent> <Space> <Nop>
 
 " Remap for dealing with word wrap
-nmap <expr> <silent> k v:count == 0 ? 'gk' : 'k'
-nmap <expr> <silent> j v:count == 0 ? 'gj' : 'j'
+nnoremap <expr> <silent> k v:count == 0 ? 'gk' : 'k'
+nnoremap <expr> <silent> j v:count == 0 ? 'gj' : 'j'
 
 
 " [[ Configure plugins ]]
@@ -264,8 +264,8 @@ augroup END
 "  See `:help compl-omni` and `:help omnifunc`
 set omnifunc=syntaxcomplete#Complete
 
-" Enter key confirms the current selection when completion is open
-inoremap <expr> <CR> pumvisible() ? '<C-y>' : '<CR>'
+" Enter key confirms the current selection and inserts space when completion is open
+inoremap <expr> <CR> pumvisible() ? '<C-y><Space>' : '<CR>'
 
 " The line beneath this is called `modeline`. See `:help modeline`
 " vim: ts=2 sts=2 sw=2 et
