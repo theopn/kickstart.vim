@@ -66,10 +66,9 @@ kickstart.vim:
     - telescope.nvim -> fzf & fzf.vim
 - disables `undofile` by default, but the instructions for changing `undodir` and enabling `undofile` are included
 - enables `hlsearch`
+- offers slightly different experience in following categories:
+    - Neovim diagnostics and LSP (`vim-lsp` and `vim-lsp-settings` are used in lieu of Neovim built-in LSP and Mason.nvim)
 - does not provide an alternative for:
     - highlight on yank
     - **nvim-treesitter**
-    - **Neovim diagnostics and LSP**
-    - I considered using coc.nvim, but it requires external dependencies and user configuration not suitable for the goal of kickstart.vim.
-        I am open to creating a branch/separate version of kickstart.vim with coc.nvim support
 
