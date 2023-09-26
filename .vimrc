@@ -124,7 +124,7 @@ set smarttab
 set wildmenu
 
 
-" [[ Settings options ]]
+" [[ Settings other options ]]
 " NOTE: You can change these options as you wish!
 
 " Set highlight on search
@@ -139,7 +139,7 @@ set mouse=a
 " Sync clipboard between OS and Neovim.
 "  Remove this option if you want your OS clipboard to remain independent.
 "  See `:help 'clipboard'`
-"set clipboard=unnamedplus
+set clipboard=unnamedplus
 
 " Enable break indent
 set breakindent
@@ -212,7 +212,21 @@ nmap <leader>sf :Files<CR>
 nmap <leader>sh :Helptags<CR>
 
 
+" [[ Configure built-in keyword completion ]]
+" Set Omni Completion
+"  See `:help compl-omni` and `:help omnifunc`
+set omnifunc=syntaxcomplete#Complete
+
+" Enter key confirms the current selection when completion is open
+inoremap <expr> <CR> pumvisible() ? '<C-y>' : '<CR>'
+
+
 " [[ Configure LSP ]]
+" NOTE: Install new language server using `:LspInstallServer` in the filetype
+" you are trying to install LSP for.
+" For example, if you want LSP server for C/C++, type
+" `:LspInstallServer clangd` in C/C++ buffer.
+
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
   setlocal signcolumn=yes
@@ -253,19 +267,6 @@ augroup lsp_install
   autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
-" NOTE: Install new language server using `:LspInstallServer` in the filetype
-" you are trying to install LSP for.
-" For example, if you want LSP server for C/C++, type
-" `:LspInstallServer clangd` in C/C++ buffer.
-
-
-" [[ Configure built-in keyword completion ]]
-" Set Omni Completion
-"  See `:help compl-omni` and `:help omnifunc`
-set omnifunc=syntaxcomplete#Complete
-
-" Enter key confirms the current selection and inserts space when completion is open
-inoremap <expr> <CR> pumvisible() ? '<C-y><Space>' : '<CR>'
 
 " The line beneath this is called `modeline`. See `:help modeline`
 " vim: ts=2 sts=2 sw=2 et
