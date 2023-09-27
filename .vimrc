@@ -92,43 +92,49 @@ filetype on
 " Turn on syntax highlighting
 syntax on
 
-" Automatically indent : Detect when the file is changed externally
+" Automatically indent
+" Detect when the file is changed externally
 set autoindent autoread
 
-" Dark mode for colorschemes : Change backspace behavior
+" Dark mode for colorschemes
+" Change backspace behavior
 set background=dark backspace=indent,eol,start
 
-" Display @@@ in the last column of last line : set default encoding
-set display=lastline encoding=utf-8
+" Set when to disable bell
+" Display @@@ in the last column of last line
+set belloff=all display=lastline
 
+" Set default encoding
 " Allow opening other files w/o saving current buffer (make the current hidden)
-set hidden
+set encoding=utf-8 hidden
 
-" Highlight search result as you type : Always show statusline
-set incsearch laststatus=2
+" Set history of ":"
+" Set highlight on search
+set history=10000 hlsearch
 
+" Highlight search result as you type
+" Disable inserting spaces after punctuations when using "J" key
+set incsearch nojoinspaces
+
+" Always show statusline
 " Characters to display for tab, trail spaces, etc., used if `:set list` is on
-set listchars=tab:>\ ,trail:-,nbsp:+
+set laststatus=2 listchars=tab:>\ ,trail:-,nbsp:+
 
-" Show line and column number in the statusline (overriden by airline)
-set ruler
-
-" Show stuff like number of lines selected in the bottom right
-set showcmd
+" Show line and column num in the statusline (useful if you don't use Airline)
+" Show number of lines selected, etc. in the bottom right
+set ruler showcmd
 
 " Use shiftwidth for the line indent and (soft)tabstop for others
 "  NOTE: See `:help tabstop` to learn how tabs in Vim work
 set smarttab
 
-" Completion menu for command (:)
-set wildmenu
+" Switch to last used buffer after using quickfix window (`:h quickfix`)
+" Completion menu for ":"
+set switchbuf=uselast wildmenu
 
 
 " [[ Settings other options ]]
 " NOTE: You can change these options as you wish!
-
-" Set highlight on search
-set hlsearch
 
 " Make line numbers default
 set number
