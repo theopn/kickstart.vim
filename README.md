@@ -53,21 +53,20 @@ vim +PlugInstall +qa
 kickstart.vim:
 
 - is written in Vimscript (:surprised Pikachu face:) and designed for Vim >= 0.8
-- **enables some settings enabled by default in Neovim (e.g., filetype, syntax, autoindent, etc.)** on the top of kickstart.nvim settings
 - uses Vim alternative for the following plugins
-    - lazy.nvim -> vim-plug
-    - nvim-cmp -> supertab
-    - which-key.nvim -> vim-which-key
-    - gitsigns.nvim -> vim-gitgutter
-    - onedark.nvim -> onedark.vim
-    - lualine.nvim -> vim-airline
-    - indent-blankline -> indentLine
-    - Comment.nvim -> vim-commentary
-    - telescope.nvim -> fzf & fzf.vim
-- disables `undofile` by default, but the instructions for changing `undodir` and enabling `undofile` are included
+    - [lazy.nvim](https://github.com/folke/lazy.nvim) -> [vim-plug](https://github.com/junegunn/vim-plug)
+    - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) and other LSP plugins -> [vim-lsp](https://github.com/prabirshrestha/vim-lsp)
+    - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) -> [supertab](https://github.com/ervandew/supertab)
+    - [which-key.nvim](https://github.com/folke/which-key.nvim) -> [vim-which-key](https://github.com/liuchengxu/vim-which-key)
+    - [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) -> [vim-gitgutter](https://github.com/airblade/vim-gitgutter)
+    - [onedark.nvim](https://github.com/navarasu/onedark.nvim) -> [onedark.vim](https://github.com/joshdick/onedark.vim)
+    - [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) -> [vim-airline](https://github.com/vim-airline/vim-airline)
+    - [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) -> [indentLine](https://github.com/Yggdroot/indentLine)
+    - [Comment.nvim](https://github.com/numToStr/Comment.nvim) -> [vim-commentary](https://github.com/tpope/vim-commentary)
+    - [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) -> [fzf](https://github.com/junegunn/fzf) & [fzf.vim](https://github.com/junegunn/fzf.vim)
+- **enables some settings enabled by default in Neovim (e.g., filetype, syntax, autoindent, etc.)** on the top of kickstart.nvim settings
 - enables `hlsearch`
-- offers slightly different experience in following categories:
-    - Neovim diagnostics and LSP (`vim-lsp` and `vim-lsp-settings` are used in lieu of Neovim built-in LSP and Mason.nvim)
+- disables `undofile` by default, but the instructions for changing `undodir` and enabling `undofile` are included
 - does not provide an alternative for:
     - highlight on yank
     - **nvim-treesitter**
