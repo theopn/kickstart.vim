@@ -192,8 +192,6 @@ nnoremap <expr> <silent> j v:count == 0 ? 'gj' : 'j'
 
 
 " [[ Configure plugins ]]
-" Make <Space> trigger key map guide
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 " Set colorscheme
 colorscheme onedark
 " Characters to render for indentation guide
@@ -235,6 +233,11 @@ let g:SuperTabDefaultCompletionType = "context"
 " For example, if you want LSP server for C/C++, type
 " `:LspInstallServer clangd` in a C/C++ buffer.
 
+" Performance related settings, requires Vim 8.2+
+let g:lsp_use_native_client = 1
+let g:lsp_semantic_enabled = 0
+let g:lsp_format_sync_timeout = 1000
+
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
   if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
@@ -274,7 +277,6 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> gD <plug>(lsp-declaration) 
 
   " Create a command `:Format` local to the LSP buffer
-  let g:lsp_format_sync_timeout = 1000
   command Format LspDocumentFormatSync
 endfunction
 
@@ -284,6 +286,8 @@ augroup lsp_install
   autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
+" [[ Configure vim-which-key ]]
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
 " The line beneath this is called `modeline`. See `:help modeline`
 " vim: ts=2 sts=2 sw=2 et
