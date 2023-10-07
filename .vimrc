@@ -194,7 +194,7 @@ nnoremap <expr> <silent> j v:count == 0 ? 'gj' : 'j'
 " [[ Configure plugins ]]
 " Make <Space> trigger key map guide
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
-" Set color scheme
+" Set colorscheme
 colorscheme onedark
 " Characters to render for indentation guide
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
@@ -217,14 +217,17 @@ nmap <leader>sf :Files<CR>
 nmap <leader>sh :Helptags<CR>
 
 
-" [[ Configure built-in keyword completion ]]
+" [[ Configure completion ]]
 " Set Omni Completion
 "  See `:help compl-omni` and `:help omnifunc`
+filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 
 " Enter key confirms the current selection when completion is open
 inoremap <expr> <CR> pumvisible() ? '<C-y>' : '<CR>'
 
+" <Tab> triggers Omni completion (<C-x><C-o>) in a coding context
+let g:SuperTabDefaultCompletionType = "context"
 
 " [[ Configure LSP ]]
 " NOTE: Install new language server using `:LspInstallServer` in the filetype
