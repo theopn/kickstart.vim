@@ -88,49 +88,47 @@ call plug#end()
 
 " Automatically detect filetype 
 filetype on
-
 " Turn on syntax highlighting
 syntax on
-
 " Automatically indent
+set autoindent
 " Detect when the file is changed externally
-set autoindent autoread
-
+set autoread
 " Dark mode for colorschemes
+set background=dark
 " Change backspace behavior
-set background=dark backspace=indent,eol,start
-
+set backspace=indent,eol,start
 " Set when to disable bell
+set belloff=all
 " Display @@@ in the last column of last line
-set belloff=all display=lastline
-
+set display=lastline
 " Set default encoding
+set encoding=utf-8
 " Allow opening other files w/o saving current buffer (make the current hidden)
-set encoding=utf-8 hidden
-
+set hidden
 " Set history of ":"
+set history=10000
 " Set highlight on search
-set history=10000 hlsearch
-
+set hlsearch
 " Highlight search result as you type
+set incsearch
 " Disable inserting spaces after punctuations when using "J" key
-set incsearch nojoinspaces
-
+set nojoinspaces
 " Always show statusline
+set laststatus=2
 " Characters to display for tab, trail spaces, etc., used if `:set list` is on
-set laststatus=2 listchars=tab:>\ ,trail:-,nbsp:+
-
+set listchars=tab:>\ ,trail:-,nbsp:+
 " Show line and column num in the statusline (useful if you don't use Airline)
+set ruler
 " Show number of lines selected, etc. in the bottom right
-set ruler showcmd
-
+set showcmd
 " Use shiftwidth for the line indent and (soft)tabstop for others
 "  NOTE: See `:help tabstop` to learn how tabs in Vim work
 set smarttab
-
 " Switch to last used buffer after using quickfix window (`:h quickfix`)
+set switchbuf=uselast
 " Completion menu for ":"
-set switchbuf=uselast wildmenu
+set wildmenu
 
 
 " [[ Settings other options ]]
@@ -153,6 +151,7 @@ set breakindent
 " Save undo history
 "  By default, undo files (.file.txt.un~) are saved in the current directory.
 "  This makes the file system very messy, so undofile is disabled by default.
+"
 "  If would like to enable undofile, I recommend you to change undodir:
 "  1. Create the undo directory: `:! mkdir -p ~/.local/state/vim/undo`
 "  2. Uncomment the following line starting with "set undodir" and save the file
