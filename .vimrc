@@ -230,38 +230,47 @@ inoremap <expr> <CR> pumvisible() ? '<C-y>' : '<CR>'
 " NOTE: Install new language server using `:LspInstallServer` in the filetype
 " you are trying to install LSP for.
 " For example, if you want LSP server for C/C++, type
-" `:LspInstallServer clangd` in C/C++ buffer.
+" `:LspInstallServer clangd` in a C/C++ buffer.
 
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
-  setlocal signcolumn=yes
   if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
 
   " Keymaps
   " Go to previous diagnostic message
   nmap <buffer> [d <plug>(lsp-previous-diagnostic)
   " Go to next diagnostic message
-  nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+  nmap <buffer> ]d <plug>(lsp-next-diagnostic)
 
   " [R]e[n]ame
-  nmap <buffer> rn <plug>(lsp-rename)
+  nmap <buffer> <leader>rn <plug>(lsp-rename)
+  " [C]ode [A]ction
+  nmap <buffer> <leader>ca <plug>(lsp-code-action-float)
 
   " [G]oto [D]efinition
   nmap <buffer> gd <plug>(lsp-definition)
   " [G]oto [R]eferences
   nmap <buffer> gr <plug>(lsp-references)
   " [G]oto [I]mplementation
-  nmap <buffer> gi <plug>(lsp-implementation)
+  nmap <buffer> gI <plug>(lsp-implementation)
   " Type [D]efinition
-  nmap <buffer> <leader>D <plug>(lsp-type-definition)
+  nmap <buffer> <leader>D <plug>(lsp-peek-type-definition)
   " [D]ocument [S]ymbols
-  nmap <buffer> ds <plug>(lsp-document-symbol-search)
+  nmap <buffer> <leader>ds <plug>(lsp-document-symbol-search)
   " [W]orkspace [S]ymbols
-  nmap <buffer> ws <plug>(lsp-workspace-symbol-search)
+  nmap <buffer> <leader>ws <plug>(lsp-workspace-symbol-search)
 
   " See `:help K` for why this keymap
+  " Hover Documentation
   nmap <buffer> K <plug>(lsp-hover)
+  " Signature Documentation
+  nmap <buffer> <C-k> <plug>(lsp-signature-help)
 
+  " Lesser used LSP functionality
+  " [G]oto [D]eclaration
+  nmap <buffer> gD <plug>(lsp-declaration) 
+
+  " Create a command `:Format` local to the LSP buffer
   let g:lsp_format_sync_timeout = 1000
   command Format LspDocumentFormatSync
 endfunction
