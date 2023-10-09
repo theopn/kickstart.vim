@@ -198,21 +198,38 @@ colorscheme onedark
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 
+" [[ Configure vim-which-key ]]
+call which_key#register('<Space>', "g:which_key_map")
+nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  '<Space>'<CR>
+
+" document key chains defined in the config
+let g:which_key_map =  {}
+let g:which_key_map.c = { 'name' : '[C]ode' }
+let g:which_key_map.d = { 'name' : '[D]ocument' }
+let g:which_key_map.g = { 'name' : '[G]it' }
+let g:which_key_map.h = { 'name' : 'More git' }
+let g:which_key_map.r = { 'name' : '[R]ename' }
+let g:which_key_map.s = { 'name' : '[S]earch' }
+let g:which_key_map.w = { 'name' : '[W]orkspace' }
+
+
 " [[ Configure fzf.vim ]]
 " See `:help fzf-vim`
 
-" [?] Find recently opened files
 nmap <leader>? :History<CR>
-" [ ] Find existing buffers
+let g:which_key_map['?'] = '[?] Find recently opened files'
 nmap <leader><space> :Buffers<CR>
-" [/] Fuzzily search in current buffer
+let g:which_key_map[' '] = '[ ] Find existing buffers'
 nmap <leader>/ :BLines<CR>
-" Search [G]it [F]iles
+let g:which_key_map['/'] = '[/] Fuzzily search in current buffer'
+
 nmap <leader>gf :GFiles<CR>
-" [S]earch [F]iles
+let g:which_key_map.g.f = 'Search [G]it [F]iles'
 nmap <leader>sf :Files<CR>
-" [S]earch [H]elp
+let g:which_key_map.s.f = '[S]earch [F]iles'
 nmap <leader>sh :Helptags<CR>
+let g:which_key_map.s.h = '[S]earch [H]elp'
 
 
 " [[ Configure completion ]]
@@ -248,10 +265,10 @@ function! s:on_lsp_buffer_enabled() abort
   " Go to next diagnostic message
   nmap <buffer> ]d <plug>(lsp-next-diagnostic)
 
-  " [R]e[n]ame
   nmap <buffer> <leader>rn <plug>(lsp-rename)
-  " [C]ode [A]ction
+  let g:which_key_map.r.n = '[R]e[n]ame'
   nmap <buffer> <leader>ca <plug>(lsp-code-action-float)
+  let g:which_key_map.c.a = '[C]ode [A]ction'
 
   " [G]oto [D]efinition
   nmap <buffer> gd <plug>(lsp-definition)
@@ -259,12 +276,13 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> gr <plug>(lsp-references)
   " [G]oto [I]mplementation
   nmap <buffer> gI <plug>(lsp-implementation)
-  " Type [D]efinition
+
   nmap <buffer> <leader>D <plug>(lsp-peek-type-definition)
-  " [D]ocument [S]ymbols
+  let g:which_key_map.D = 'Type [D]efinition'
   nmap <buffer> <leader>ds <plug>(lsp-document-symbol-search)
-  " [W]orkspace [S]ymbols
+  let g:which_key_map.d.s = '[D]ocument [S]ymbols'
   nmap <buffer> <leader>ws <plug>(lsp-workspace-symbol-search)
+  let g:which_key_map.w.s = '[W]orkspace [S]ymbols'
 
   " See `:help K` for why this keymap
   " Hover Documentation
@@ -285,9 +303,6 @@ augroup lsp_install
   " call s:on_lsp_buffer_enabled only for languages that has the server registered.
   autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
-
-" [[ Configure vim-which-key ]]
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
 " The line beneath this is called `modeline`. See `:help modeline`
 " vim: ts=2 sts=2 sw=2 et
