@@ -14,7 +14,7 @@
 " If you are using Neovim, consider using Kickstart.nvim instead:
 " https://github.com/nvim-lua/kickstart.nvim
 "
-" Feel free to delete this comment once you feel that this config is "yours."
+" Feel free to delete this comment once you feel that this config is *yours*.
 " I hope you enjoy your Vim journey!
 " - Theo
 "
@@ -203,12 +203,16 @@ call which_key#register('<Space>', "g:which_key_map")
 nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
 nnoremap <silent> <localleader> :<c-u>WhichKey  '<Space>'<CR>
 
-" document key chains defined in the config
+" document key chains
 let g:which_key_map =  {}
 let g:which_key_map.c = { 'name' : '[C]ode' }
 let g:which_key_map.d = { 'name' : '[D]ocument' }
 let g:which_key_map.g = { 'name' : '[G]it' }
-let g:which_key_map.h = { 'name' : 'More git' }
+" See `:help gitgutter-mappings`
+let g:which_key_map.h = {
+      \ 'name' : 'More git',
+      \ 'p' : 'Preview git hunk',
+      \}
 let g:which_key_map.r = { 'name' : '[R]ename' }
 let g:which_key_map.s = { 'name' : '[S]earch' }
 let g:which_key_map.w = { 'name' : '[W]orkspace' }
