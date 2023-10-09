@@ -86,7 +86,7 @@ call plug#end()
 " Find the list of the options here:
 " https://neovim.io/doc/user/vim_diff.html#nvim-defaults
 
-" Automatically detect filetype 
+" Automatically detect filetype
 filetype on
 " Turn on syntax highlighting
 syntax on
@@ -106,7 +106,7 @@ set display=lastline
 set encoding=utf-8
 " Allow opening other files w/o saving current buffer (make the current hidden)
 set hidden
-" Set history of ":"
+" Set number of saved history for ":"
 set history=10000
 " Set highlight on search
 set hlsearch
@@ -125,10 +125,14 @@ set showcmd
 " Use shiftwidth for the line indent and (soft)tabstop for others
 "  NOTE: See `:help tabstop` to learn how tabs in Vim work
 set smarttab
+" Keep the cursor column position after gg, G, etc.
+set nostartofline
 " Switch to last used buffer after using quickfix window (`:h quickfix`)
 set switchbuf=uselast
 " Completion menu for ":"
 set wildmenu
+" Use insert-completion style window for the command completion
+set wildoptions=pum,tagfile
 
 
 " [[ Settings other options ]]
@@ -296,7 +300,7 @@ function! s:on_lsp_buffer_enabled() abort
 
   " Lesser used LSP functionality
   " [G]oto [D]eclaration
-  nmap <buffer> gD <plug>(lsp-declaration) 
+  nmap <buffer> gD <plug>(lsp-declaration)
 
   " Create a command `:Format` local to the LSP buffer
   command Format LspDocumentFormatSync
