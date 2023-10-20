@@ -83,55 +83,56 @@ call plug#end()
 " [[ Setting sensible default options ]]
 " These are some of the settings enabled by default in Neovim.
 " These are options believed by many Vim users to be essential.
-" Find the list of the options here:
-" https://neovim.io/doc/user/vim_diff.html#nvim-defaults
+" Find the list of the options using: `:options` and/or `:h option-list`
 
-" Automatically detect filetype
+" switch on file type detection, without syntax highlighting
 filetype on
-" Turn on syntax highlighting
+" start using syntax highlighting
 syntax on
-" Automatically indent
+" automatically set the indent of a new line
 set autoindent
-" Detect when the file is changed externally
+" automatically read a file when it was modified outside of Vim
 set autoread
-" Dark mode for colorschemes
+" "dark" or "light"; the background color brightness
 set background=dark
-" Change backspace behavior
+" specifies what <BS>, CTRL-W, etc. can do in Insert mode
 set backspace=indent,eol,start
-" Set when to disable bell
+" do not ring the bell for these reasons
 set belloff=all
-" Display @@@ in the last column of last line
+" include "lastline" to show the last line even if it doesn't fit
+" include "uhex" to show unprintable characters as a hex number
 set display=lastline
-" Set default encoding
+" character encoding used in Vim: "latin1", "utf-8",
 set encoding=utf-8
-" Allow opening other files w/o saving current buffer (make the current hidden)
+" don't unload a buffer when no longer shown in a window
+" (Allow opening other files w/o saving current buffer)
 set hidden
-" Set number of saved history for ":"
+" how many command lines are remembered
 set history=10000
-" Set highlight on search
+" highlight all matches for the last used search pattern
 set hlsearch
-" Highlight search result as you type
+" show match for partly typed search command
 set incsearch
-" Disable inserting spaces after punctuations when using "J" key
+" use two spaces after '.' when joining a line
 set nojoinspaces
-" Always show statusline
+" 0, 1 or 2; when to use a status line for the last window
 set laststatus=2
-" Characters to display for tab, trail spaces, etc., used if `:set list` is on
+" list of strings used for list mode
 set listchars=tab:>\ ,trail:-,nbsp:+
-" Show line and column num in the statusline (useful if you don't use Airline)
+" show cursor position below each window
 set ruler
-" Show number of lines selected, etc. in the bottom right
+" show (partial) command keys in location given by 'showcmdloc'
 set showcmd
-" Use shiftwidth for the line indent and (soft)tabstop for others
+" a <Tab> in an indent inserts 'shiftwidth' spaces
 "  NOTE: See `:help tabstop` to learn how tabs in Vim work
 set smarttab
-" Keep the cursor column position after gg, G, etc.
+" many jump commands move the cursor to the first non-blank
 set nostartofline
-" Switch to last used buffer after using quickfix window (`:h quickfix`)
+" "useopen" and/or "split"; which window to use when jumping to a buffer
 set switchbuf=uselast
-" Completion menu for ":"
+" use menu for command line completion
 set wildmenu
-" Use insert-completion style window for the command completion
+" specifies how command line completion is done
 set wildoptions=pum,tagfile
 
 
