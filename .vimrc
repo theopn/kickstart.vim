@@ -10,97 +10,35 @@
 " Vim's built-in help, triggered by `:help X` is a very helpful guide for any
 " of the Vim's built-in features as well as plugins.
 "
-" Kickstart.vim is heavily inspired by Kickstart.nvim.
-" If you are using Neovim, consider using Kickstart.nvim instead:
-" https://github.com/nvim-lua/kickstart.nvim
 "
 " Feel free to delete this comment once you feel that this config is *yours*.
 " I hope you enjoy your Vim journey!
 " - Theo
 "
+" If you are using Neovim, you should use Kickstart.nvim instead:
+" https://github.com/nvim-lua/kickstart.nvim
+" (If you are using Vim, use `gx` keybinding to open the link)
+
 
 " Set <space> as the leader key
 " See `:help mapleader`
-"  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 let mapleader=' '
 let maplocalleader = ' '
 
 
-" Install package manager
-" https://github.com/junegunn/vim-plug/
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-" NOTE: Here is where you install your plugins.
-call plug#begin()
-
-" Git related plugins
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-
-" Detect tabstop and shiftwidth automatically
-Plug 'tpope/vim-sleuth'
-
-" NOTE: This is where your plugins related to LSP can be installed.
-"  The configuration is done below. Search for lsp to find it below.
-
-" Enable LSP
-Plug 'prabirshrestha/vim-lsp'
-" Install language servers and configure them for vim-lsp
-Plug 'mattn/vim-lsp-settings'
-
-" Use <Tab> to auto complete
-Plug 'ervandew/supertab'
-
-" Useful plugin to show you pending keybinds.
-Plug 'liuchengxu/vim-which-key'
-
-" Adds git related signs to the gutter
-Plug 'airblade/vim-gitgutter'
-
-" Theme inspired by Atom
-Plug 'joshdick/onedark.vim'
-
-" Set airline as statusline
-Plug 'vim-airline/vim-airline'
-
-" Add indentation guides even on blank lines
-Plug 'Yggdroot/indentLine'
-
-" "gc" to comment visual regions/lines
-Plug 'tpope/vim-commentary'
-
-" Fuzzy Finder
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-call plug#end()
-
-
-" [[ Setting sensible default options ]]
-" These are some of the settings enabled by default in Neovim.
+" [[ Setting Neovim default options ]]
+" These are some of the options enabled by default in Neovim
 " These are options believed by many Vim users to be essential.
-" Find the list of the options using: `:options` and/or `:h option-list`
-
-" switch on file type detection, without syntax highlighting
+" For more information, see `:h vim_diff.txt` in Neovim
+" I will skip the 
 filetype on
-" start using syntax highlighting
 syntax on
-" automatically set the indent of a new line
-set autoindent
-" automatically read a file when it was modified outside of Vim
-set autoread
-" "dark" or "light"; the background color brightness
-set background=dark
-" specifies what <BS>, CTRL-W, etc. can do in Insert mode
-set backspace=indent,eol,start
-" do not ring the bell for these reasons
-set belloff=all
+set autoindent autoread background=dark
+set backspace=indent,eol,start belloff=all
+
+
 " include "lastline" to show the last line even if it doesn't fit
-" include "uhex" to show unprintable characters as a hex number
+" (displays `@@@` in the unfit line)
 set display=lastline
 " character encoding used in Vim: "latin1", "utf-8",
 set encoding=utf-8
@@ -137,18 +75,26 @@ set wildoptions=pum,tagfile
 
 
 " [[ Settings other options ]]
+" See `:help :set`
 " NOTE: You can change these options as you wish!
+"  For more options, you can see `:help option-list`
 
 " Make line numbers default
 set number
+" You can also add relative line numbers, to help with jumping.
+"  Experiment for yourself to see if you like it!
+"set relativenumber
 
-" Enable mouse mode
+" Enable mouse mode, can be useful for resizing splits for example!
 set mouse=a
+
+" Don't show the mode, since it's already in the status line
+set noshowmode
 
 " Sync clipboard between OS and Neovim.
 "  Remove this option if you want your OS clipboard to remain independent.
 "  See `:help 'clipboard'`
-set clipboard=unnamedplus
+"set clipboard=unnamedplus
 
 " Enable break indent
 set breakindent
@@ -176,31 +122,119 @@ set signcolumn=yes
 
 " Decrease update time
 set updatetime=250
+
+" Decrease mapped sequence wait time
+" Displays vim-which-key sooner
 set timeoutlen=300
 
-" Set completeopt to have a better completion experience
-set completeopt=menuone,noselect
+" Configure how new splits should be opened
+set splitright
+set splitbelow
 
-" NOTE: You should make sure your terminal supports this
-set termguicolors
+" Sets how vim will display certain whitespace characters in the editor.
+set list
+set listchars=tab:»\ ,trail:·,nbsp:␣
+" Use the following settings if you do not want unicode characters
+"set listchars=tab:>\ ,trail:-,nbsp:+
+
+" Show which line your cursor is on
+set cursorline
+
+" Minimal number of screen lines to keep above and below the cursor
+set scrolloff=10
 
 
 " [[ Basic Keymaps ]]
 
-" Keymaps for better default experience
-nnoremap <silent> <Space> <Nop>
-xnoremap <silent> <Space> <Nop>
+" Set highlight on search, but clear on pressing <Esc> in normal mode
+set hlsearch
+nnoremap <Esc> :nohlsearch<CR>
+
+" Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
+" for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
+" is not what someone will guess without a bit more experience.
+"
+" NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
+" or just use <C-\><C-n> to exit terminal mode
+tnoremap <Esc><Esc> <C-\><C-n>
 
 " Remap for dealing with word wrap
 nnoremap <expr> <silent> k v:count == 0 ? 'gk' : 'k'
 nnoremap <expr> <silent> j v:count == 0 ? 'gj' : 'j'
 
+" TIP: Disable arrow keys in normal mode
+nnoremap <left> :echo "Use h to move!!"<CR>
+nnoremap <right> :echo "Use l to move!!"<CR>
+nnoremap <up> :echo "Use k to move!!"<CR>
+nnoremap <down> :echo "Use j to move!!"<CR>
+
+" Keybinds to make split navigation easier.
+"  Use CTRL+<hjkl> to switch between windows
+"
+"  See `:help wincmd` for a list of all window commands
+nnoremap <C-h> <C-w><C-h>
+nnoremap <C-l> <C-w><C-l>
+nnoremap <C-j> <C-w><C-j>
+nnoremap <C-k> <C-w><C-k>
+
+
+" [[ Install `vim-plug` plugin manager ]]
+"    See https://github.com/junegunn/vim-plug/ for more info
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" [[ Install plugins ]]
+"  To check the current status of your plugins, run
+"    :PlugStatus
+"
+"  To update plugins you can run
+"    :PlugUpdate
+"
+" Note: Here is where you install your plugins.
+call plug#begin()
+" Detect tabstop and shiftwidth automatically
+Plug 'tpope/vim-sleuth'
+
+" "gc" to comment visual regions/lines
+Plug 'tpope/vim-commentary'
+
+" Adds git related signs to the gutter
+Plug 'airblade/vim-gitgutter'
+
+" Useful plugin to show you pending keybinds.
+Plug 'liuchengxu/vim-which-key'
+
+" Fuzzy Finder
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" Enable LSP
+Plug 'prabirshrestha/vim-lsp'
+" Install language servers and configure them for vim-lsp
+Plug 'mattn/vim-lsp-settings'
+
+" Autocompletion
+"Plug 'prabirshrestha/asyncomplete.vim'
+" Use <Tab> to auto complete
+Plug 'ervandew/supertab'
+
+" Colorscheme
+Plug 'ghifarit53/tokyonight-vim'
+
+" Set airline as statusline
+Plug 'vim-airline/vim-airline'
+call plug#end()
+
 
 " [[ Configure plugins ]]
 " Set colorscheme
-colorscheme onedark
-" Characters to render for indentation guide
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+set termguicolors
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 0
+colorscheme tokyonight
 
 
 " [[ Configure vim-which-key ]]
@@ -208,50 +242,36 @@ call which_key#register('<Space>', "g:which_key_map")
 nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
 nnoremap <silent> <localleader> :<c-u>WhichKey  '<Space>'<CR>
 
-" document key chains
+" Document existing key chains
 let g:which_key_map =  {}
 let g:which_key_map.c = { 'name' : '[C]ode' }
 let g:which_key_map.d = { 'name' : '[D]ocument' }
-let g:which_key_map.g = { 'name' : '[G]it' }
-" See `:help gitgutter-mappings`
-let g:which_key_map.h = {
-      \ 'name' : 'More git',
-      \ 'p' : 'Preview git hunk',
-      \}
 let g:which_key_map.r = { 'name' : '[R]ename' }
 let g:which_key_map.s = { 'name' : '[S]earch' }
 let g:which_key_map.w = { 'name' : '[W]orkspace' }
+let g:which_key_map.t = { 'name' : '[T]oggle' }
+let g:which_key_map.h = { 'name' : 'Git [H]unk' }
 
 
 " [[ Configure fzf.vim ]]
 " See `:help fzf-vim`
 
-nmap <leader>? :History<CR>
-let g:which_key_map['?'] = '[?] Find recently opened files'
-nmap <leader><space> :Buffers<CR>
+nmap <leader>sh :Helptags<CR>
+let g:which_key_map.s.h = '[S]earch [H]elp'
+nmap <leader>sk :Maps<CR>
+let g:which_key_map.s.k = '[S]earch [K]eymaps'
+nmap <leader>sf :Files<CR>
+let g:which_key_map.s.f = '[S]earch [F]iles'
+nmap <leader>sg :Rg<CR>
+let g:which_key_map.s.g = '[S]earch by [G]rep'
+nmap <leader>s. :History<CR>
+let g:which_key_map.s['.'] = '[S]earch Recent Files ("." for repeat)'
+nmap <leader><leader> :Buffers<CR>
 let g:which_key_map[' '] = '[ ] Find existing buffers'
+
 nmap <leader>/ :BLines<CR>
 let g:which_key_map['/'] = '[/] Fuzzily search in current buffer'
 
-nmap <leader>gf :GFiles<CR>
-let g:which_key_map.g.f = 'Search [G]it [F]iles'
-nmap <leader>sf :Files<CR>
-let g:which_key_map.s.f = '[S]earch [F]iles'
-nmap <leader>sh :Helptags<CR>
-let g:which_key_map.s.h = '[S]earch [H]elp'
-
-
-" [[ Configure completion ]]
-" Set Omni Completion
-"  See `:help compl-omni` and `:help omnifunc`
-filetype plugin on
-set omnifunc=syntaxcomplete#Complete
-
-" Enter key confirms the current selection when completion is open
-inoremap <expr> <CR> pumvisible() ? '<C-y>' : '<CR>'
-
-" <Tab> triggers Omni completion (<C-x><C-o>) in a coding context
-let g:SuperTabDefaultCompletionType = "context"
 
 " [[ Configure LSP ]]
 " NOTE: Install new language server using `:LspInstallServer` in the filetype
@@ -312,6 +332,20 @@ augroup lsp_install
   " call s:on_lsp_buffer_enabled only for languages that has the server registered.
   autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
+
+
+" [[ Configure completion ]]
+" Set Omni Completion
+"  See `:help compl-omni` and `:help omnifunc`
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
+
+" Enter key confirms the current selection when completion is open
+inoremap <expr> <CR> pumvisible() ? '<C-y>' : '<CR>'
+
+" <Tab> triggers Omni completion (<C-x><C-o>) in a coding context
+let g:SuperTabDefaultCompletionType = "context"
+
 
 " The line beneath this is called `modeline`. See `:help modeline`
 " vim: ts=2 sts=2 sw=2 et
