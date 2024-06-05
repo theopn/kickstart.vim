@@ -1,23 +1,32 @@
 "
 " =====================================================================
-" =========================== KICKSTART.VIM ===========================
+" ========                                    .-----.          ========
+" ========         .----------------------.   | === |          ========
+" ========         |.-""""""""""""""""""-.|   |-----|          ========
+" ========         ||                    ||   | === |          ========
+" ========         ||   KICKSTART.VIM    ||   |-----|          ========
+" ========         ||                    ||   | === |          ========
+" ========         ||                    ||   |-----|          ========
+" ========         ||:Tutor              ||   |:::::|          ========
+" ========         |'-..................-'|   |____o|          ========
+" ========         `"")----------------(""`   ___________      ========
+" ========        /::::::::::|  |::::::::::\  \ no mouse \     ========
+" ========       /:::========|  |==hjkl==:::\  \ required \    ========
+" ========      '""""""""""""'  '""""""""""""'  '""""""""""'   ========
+" ========                                                     ========
 " =====================================================================
 "
-" Kickstart.vim is a template for *your* Vim configuration.
-" You should read every line of the code and understand what it is doing.
-" Afterwards, you can configure and tinker with vimrc.
-"
-" Vim's built-in help, triggered by `:help X` is a very helpful guide for any
-" of the Vim's built-in features as well as plugins.
-"
-"
-" Feel free to delete this comment once you feel that this config is *yours*.
-" I hope you enjoy your Vim journey!
-" - Theo
+" Kickstart.vim is a starting point for your Vim configuration,
+" heavily inspired by Kickstart.nvim.
 "
 " If you are using Neovim, you should use Kickstart.nvim instead:
 " https://github.com/nvim-lua/kickstart.nvim
-" (If you are using Vim, use `gx` keybinding to open the link)
+" (use `gx` keybinding to open the link)
+"
+" If you have any question while reading the .vimrc,
+" you should use Vim's built-in help, triggered by `:help X`.
+" We also provide a keymap "<space>sh" [s]earch [h]elp documentation.
+"
 
 
 " Set <space> as the leader key
@@ -35,44 +44,11 @@ filetype on
 syntax on
 set autoindent autoread background=dark
 set backspace=indent,eol,start belloff=all
-
-
-" include "lastline" to show the last line even if it doesn't fit
-" (displays `@@@` in the unfit line)
-set display=lastline
-" character encoding used in Vim: "latin1", "utf-8",
-set encoding=utf-8
-" don't unload a buffer when no longer shown in a window
-" (Allow opening other files w/o saving current buffer)
-set hidden
-" how many command lines are remembered
-set history=10000
-" highlight all matches for the last used search pattern
-set hlsearch
-" show match for partly typed search command
-set incsearch
-" use two spaces after '.' when joining a line
-set nojoinspaces
-" 0, 1 or 2; when to use a status line for the last window
-set laststatus=2
-" list of strings used for list mode
-set listchars=tab:>\ ,trail:-,nbsp:+
-" show cursor position below each window
-set ruler
-" show (partial) command keys in location given by 'showcmdloc'
-set showcmd
-" a <Tab> in an indent inserts 'shiftwidth' spaces
-"  NOTE: See `:help tabstop` to learn how tabs in Vim work
-set smarttab
-" many jump commands move the cursor to the first non-blank
-set nostartofline
-" "useopen" and/or "split"; which window to use when jumping to a buffer
-set switchbuf=uselast
-" use menu for command line completion
-set wildmenu
-" specifies how command line completion is done
-set wildoptions=pum,tagfile
-
+set display=lastline encoding=utf-8 hidden
+set history=10000 hlsearch incsearch
+set nojoinspaces laststatus=2 ruler
+set showcmd smarttab nostartofline
+set switchbuf=uselast wildmenu "wildoptions=pum,tagfile
 
 " [[ Settings other options ]]
 " See `:help :set`
@@ -94,7 +70,7 @@ set noshowmode
 " Sync clipboard between OS and Neovim.
 "  Remove this option if you want your OS clipboard to remain independent.
 "  See `:help 'clipboard'`
-"set clipboard=unnamedplus
+set clipboard=unnamedplus
 
 " Enable break indent
 set breakindent
@@ -111,7 +87,8 @@ set breakindent
 "
 "  NOTE: See `:help undofile` and `:help undodir` for more information
 "    You may change the undodir to another directory you prefer
-"set undodir=~/.local/state/vim/undo// undofile
+"set undodir=~/.local/state/vim/undo//
+"set undofile
 
 " Case-insensitive searching UNLESS \C or capital in search
 set ignorecase
