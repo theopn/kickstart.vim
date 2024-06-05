@@ -5,14 +5,8 @@
 ### Introduction
 
 Kickstart.vim is a Vimscript version of [Kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim).
-Like Kickstart.nvim, Kickstart.vim strives to be:
 
-> A starting point for ~~Neovim~~ Vim that is:
->
-> * Small
-> * Single-file ~~(with examples of moving to multi-file)~~
-> * Documented
-> * Modular
+> Kickstart.vim is not associated with core maintainers of Kickstart.nvim. *Huge thanks to Kickstart.nvim for helping me with my (Neo)vim journey and inspiring me to create a little project like this.*
 
 ### Installation
 
@@ -48,26 +42,22 @@ Run the following command and launch Vim again, and you are ready to go!
 vim +PlugInstall +qa
 ```
 
-### Changes from Kickstart.nvim
+### Notable Changes Compared to Kickstart.nvim
 
 kickstart.vim:
 
 - is written in Vimscript (:surprised Pikachu face:) and designed for Vim >= 0.8
-- uses Vim alternative for the following plugins
-    - [lazy.nvim](https://github.com/folke/lazy.nvim) -> [vim-plug](https://github.com/junegunn/vim-plug)
-    - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) and other LSP plugins -> [vim-lsp](https://github.com/prabirshrestha/vim-lsp)
-    - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) -> [supertab](https://github.com/ervandew/supertab)
-    - [which-key.nvim](https://github.com/folke/which-key.nvim) -> [vim-which-key](https://github.com/liuchengxu/vim-which-key)
-    - [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) -> [vim-gitgutter](https://github.com/airblade/vim-gitgutter)
-    - [onedark.nvim](https://github.com/navarasu/onedark.nvim) -> [onedark.vim](https://github.com/joshdick/onedark.vim)
-    - [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) -> [vim-airline](https://github.com/vim-airline/vim-airline)
-    - [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) -> [indentLine](https://github.com/Yggdroot/indentLine)
-    - [Comment.nvim](https://github.com/numToStr/Comment.nvim) -> [vim-commentary](https://github.com/tpope/vim-commentary)
-    - [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) -> [fzf](https://github.com/junegunn/fzf) & [fzf.vim](https://github.com/junegunn/fzf.vim)
 - **enables some settings enabled by default in Neovim (e.g., filetype, syntax, autoindent, etc.)** on the top of kickstart.nvim settings
-- enables `hlsearch`
 - disables `undofile` by default, but the instructions for changing `undodir` and enabling `undofile` are included
+- uses Vimscript alternatives like:
+    - [vim-plug](https://github.com/junegunn/vim-plug)
+    - [vim-lsp](https://github.com/prabirshrestha/vim-lsp)
+    - [fzf](https://github.com/junegunn/fzf) & [fzf.vim](https://github.com/junegunn/fzf.vim)
 - does not provide an alternative for:
     - highlight on yank
     - **nvim-treesitter**
+- omits Lua configuration and comments irrelevant to Vim
+- is overall simpler than Kickstart.nvim
+
+The best way to understand is to read the configuration!
 
