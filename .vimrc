@@ -45,7 +45,7 @@ syntax on
 set autoindent autoread background=dark
 set backspace=indent,eol,start belloff=all
 set display=lastline encoding=utf-8 hidden
-set history=10000 hlsearch incsearch
+set history=10000 incsearch
 set nojoinspaces laststatus=2 ruler
 set showcmd smarttab nostartofline
 set switchbuf=uselast wildmenu "wildoptions=pum,tagfile
@@ -194,9 +194,8 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 
 " Autocompletion
-"Plug 'prabirshrestha/asyncomplete.vim'
-" Use <Tab> to auto complete
-Plug 'ervandew/supertab'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 " Colorscheme
 Plug 'ghifarit53/tokyonight-vim'
@@ -209,7 +208,7 @@ call plug#end()
 " [[ Configure plugins ]]
 " Set colorscheme
 set termguicolors
-let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_style = 'night'  " available: night, storm
 let g:tokyonight_enable_italic = 0
 colorscheme tokyonight
 
@@ -312,16 +311,12 @@ augroup END
 
 
 " [[ Configure completion ]]
-" Set Omni Completion
-"  See `:help compl-omni` and `:help omnifunc`
-filetype plugin on
-set omnifunc=syntaxcomplete#Complete
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <CR>    pumvisible() ? asyncomplete#close_popup() : "\<CR>""
 
-" Enter key confirms the current selection when completion is open
-inoremap <expr> <CR> pumvisible() ? '<C-y>' : '<CR>'
-
-" <Tab> triggers Omni completion (<C-x><C-o>) in a coding context
-let g:SuperTabDefaultCompletionType = "context"
+let g:asyncomplete_auto_completeopt = 0
+set completeopt=menuone,noinsert,noselect,preview
 
 
 " The line beneath this is called `modeline`. See `:help modeline`
