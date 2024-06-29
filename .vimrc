@@ -257,8 +257,7 @@ let g:which_key_map['/'] = '[/] Fuzzily search in current buffer'
 
 " Performance related settings, requires Vim 8.2+
 let g:lsp_use_native_client = 1
-let g:lsp_semantic_enabled = 0
-let g:lsp_format_sync_timeout = 1000
+let g:lsp_semantic_enabled = 1
 
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
@@ -300,7 +299,8 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> gD <plug>(lsp-declaration)
 
   " Create a command `:Format` local to the LSP buffer
-  command Format LspDocumentFormatSync
+  let g:lsp_format_sync_timeout = 1000
+  command! Format LspDocumentFormatSync
 endfunction
 
 augroup lsp_install
