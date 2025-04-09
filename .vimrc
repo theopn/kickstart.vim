@@ -260,28 +260,28 @@ function! s:on_lsp_buffer_enabled() abort
 
   " Keymaps
   " These keybindings are default in Neovim
-  nmap <buffer> [d <plug>(lsp-previous-diagnostic)
-  nmap <buffer> ]d <plug>(lsp-next-diagnostic)
+  nnoremap <buffer> [d <plug>(lsp-previous-diagnostic)
+  nnoremap <buffer> ]d <plug>(lsp-next-diagnostic)
   " See `:help K` for why this keymap
-  nmap <buffer> K <plug>(lsp-hover)
-  nmap <buffer> grn <plug>(lsp-rename)
-  nmap <buffer> gra <plug>(lsp-code-action-float)
-  nmap <buffer> grr <plug>(lsp-references)
-  nmap <buffer> gri <plug>(lsp-implementation)
-  nmap <buffer> gO <plug>(lsp-document-symbol-search)
-  nmap <buffer> <C-s> <plug>(lsp-signature-help)
+  nnoremap <buffer> K <plug>(lsp-hover)
+  nnoremap <buffer> grn <plug>(lsp-rename)
+  nnoremap <buffer> gra <plug>(lsp-code-action-float)
+  nnoremap <buffer> grr <plug>(lsp-references)
+  nnoremap <buffer> gri <plug>(lsp-implementation)
+  nnoremap <buffer> gO <plug>(lsp-document-symbol-search)
+  nnoremap <buffer> <C-s> <plug>(lsp-signature-help)
 
   " Other useful functions
-  nmap <buffer> grd <plug>(lsp-definition)
+  nnoremap <buffer> grd <plug>(lsp-definition)
   " In C, this would take you to the header file
-  nmap <buffer> grD <plug>(lsp-declaration)
-  nmap <buffer> grt <plug>(lsp-peek-type-definition)
-  nmap <buffer> gW <plug>(lsp-workspace-symbol-search)
+  nnoremap <buffer> grD <plug>(lsp-declaration)
+  nnoremap <buffer> grt <plug>(lsp-peek-type-definition)
+  nnoremap <buffer> gW <plug>(lsp-workspace-symbol-search)
 
   " Create a command `:Format` local to the LSP buffer
   let g:lsp_format_sync_timeout = 1000
   "command! Format LspDocumentFormatSync
-  nmap <buffer> <leader>f <plug>(lsp-document-format)
+  nnoremap <buffer> <leader>f <plug>(lsp-document-format)
   let g:which_key_map.f = '[F]ormat buffer'
 endfunction
 
