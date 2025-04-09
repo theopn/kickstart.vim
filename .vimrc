@@ -220,12 +220,7 @@ nnoremap <silent> <localleader> :<c-u>WhichKey  '<Space>'<CR>
 
 " Document existing key chains
 let g:which_key_map =  {}
-let g:which_key_map.c = { 'name' : '[C]ode' }
-let g:which_key_map.d = { 'name' : '[D]ocument' }
-let g:which_key_map.r = { 'name' : '[R]ename' }
 let g:which_key_map.s = { 'name' : '[S]earch' }
-let g:which_key_map.w = { 'name' : '[W]orkspace' }
-let g:which_key_map.t = { 'name' : '[T]oggle' }
 let g:which_key_map.h = { 'name' : 'Git [H]unk' }
 
 
@@ -264,43 +259,30 @@ function! s:on_lsp_buffer_enabled() abort
   if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
 
   " Keymaps
-  " Go to previous diagnostic message
+  " These keybindings are default in Neovim
   nmap <buffer> [d <plug>(lsp-previous-diagnostic)
-  " Go to next diagnostic message
   nmap <buffer> ]d <plug>(lsp-next-diagnostic)
-
-  nmap <buffer> <leader>rn <plug>(lsp-rename)
-  let g:which_key_map.r.n = '[R]e[n]ame'
-  nmap <buffer> <leader>ca <plug>(lsp-code-action-float)
-  let g:which_key_map.c.a = '[C]ode [A]ction'
-
-  " [G]oto [D]efinition
-  nmap <buffer> gd <plug>(lsp-definition)
-  " [G]oto [R]eferences
-  nmap <buffer> gr <plug>(lsp-references)
-  " [G]oto [I]mplementation
-  nmap <buffer> gI <plug>(lsp-implementation)
-
-  nmap <buffer> <leader>D <plug>(lsp-peek-type-definition)
-  let g:which_key_map.D = 'Type [D]efinition'
-  nmap <buffer> <leader>ds <plug>(lsp-document-symbol-search)
-  let g:which_key_map.d.s = '[D]ocument [S]ymbols'
-  nmap <buffer> <leader>ws <plug>(lsp-workspace-symbol-search)
-  let g:which_key_map.w.s = '[W]orkspace [S]ymbols'
-
   " See `:help K` for why this keymap
-  " Hover Documentation
   nmap <buffer> K <plug>(lsp-hover)
-  " Signature Documentation
-  nmap <buffer> <C-k> <plug>(lsp-signature-help)
+  nmap <buffer> grn <plug>(lsp-rename)
+  nmap <buffer> gra <plug>(lsp-code-action-float)
+  nmap <buffer> grr <plug>(lsp-references)
+  nmap <buffer> gri <plug>(lsp-implementation)
+  nmap <buffer> gO <plug>(lsp-document-symbol-search)
+  nmap <buffer> <C-s> <plug>(lsp-signature-help)
 
-  " Lesser used LSP functionality
-  " [G]oto [D]eclaration
-  nmap <buffer> gD <plug>(lsp-declaration)
+  " Other useful functions
+  nmap <buffer> grd <plug>(lsp-definition)
+  " In C, this would take you to the header file
+  nmap <buffer> grD <plug>(lsp-declaration)
+  nmap <buffer> grt <plug>(lsp-peek-type-definition)
+  nmap <buffer> gW <plug>(lsp-workspace-symbol-search)
 
   " Create a command `:Format` local to the LSP buffer
   let g:lsp_format_sync_timeout = 1000
-  command! Format LspDocumentFormatSync
+  "command! Format LspDocumentFormatSync
+  nmap <buffer> <leader>f <plug>(lsp-document-format)
+  let g:which_key_map.f = '[F]ormat buffer'
 endfunction
 
 augroup lsp_install
