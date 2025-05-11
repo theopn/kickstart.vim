@@ -7,7 +7,7 @@
 " ========         ||   KICKSTART.VIM    ||   |-----|          ========
 " ========         ||                    ||   | === |          ========
 " ========         ||                    ||   |-----|          ========
-" ========         ||:Tutor              ||   |:::::|          ========
+" ========         ||:!vimtutor          ||   |:::::|          ========
 " ========         |'-..................-'|   |____o|          ========
 " ========         `"")----------------(""`   ___________      ========
 " ========        /::::::::::|  |::::::::::\  \ no mouse \     ========
@@ -39,7 +39,6 @@ let maplocalleader = ' '
 " These are some of the options enabled by default in Neovim
 " These are options believed by many Vim users to be essential.
 " For more information, see `:h vim_diff.txt` in Neovim
-" I will skip the 
 filetype on
 syntax on
 set autoindent autoread background=dark
@@ -67,7 +66,7 @@ set mouse=a
 " Don't show the mode, since it's already in the status line
 set noshowmode
 
-" Sync clipboard between OS and Neovim.
+" Sync clipboard between OS and Vim.
 "  Remove this option if you want your OS clipboard to remain independent.
 "  See `:help 'clipboard'`
 set clipboard=unnamedplus
@@ -108,7 +107,7 @@ set timeoutlen=300
 set splitright
 set splitbelow
 
-" Sets how vim will display certain whitespace characters in the editor.
+" Sets how Vim will display certain whitespace characters in the editor.
 set list
 set listchars=tab:»\ ,trail:·,nbsp:␣
 " Use the following settings if you do not want unicode characters
