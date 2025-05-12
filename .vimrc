@@ -119,6 +119,11 @@ set cursorline
 " Minimal number of screen lines to keep above and below the cursor
 set scrolloff=10
 
+" if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
+" instead raise a dialog asking if you wish to save the current file(s)
+" See `:help 'confirm'`
+set confirm
+
 
 " [[ Basic Keymaps ]]
 
@@ -206,9 +211,9 @@ call plug#end()
 
 " [[ Configure plugins ]]
 " Set colorscheme
-set termguicolors
-let g:tokyonight_style = 'night'  " available: night, storm
-let g:tokyonight_enable_italic = 0
+set termguicolors                   " Enable RGB colors
+let g:tokyonight_style = 'night'    " available: night, storm
+let g:tokyonight_enable_italic = 0  " Disable italics in comments
 colorscheme tokyonight
 
 
@@ -277,9 +282,8 @@ function! s:on_lsp_buffer_enabled() abort
   nnoremap <buffer> grt <plug>(lsp-peek-type-definition)
   nnoremap <buffer> gW <plug>(lsp-workspace-symbol-search)
 
-  " Create a command `:Format` local to the LSP buffer
+  " Formatting
   let g:lsp_format_sync_timeout = 1000
-  "command! Format LspDocumentFormatSync
   nnoremap <buffer> <leader>f <plug>(lsp-document-format)
   let g:which_key_map.f = '[F]ormat buffer'
 endfunction
